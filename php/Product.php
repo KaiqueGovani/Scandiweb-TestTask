@@ -2,13 +2,16 @@
 
 abstract class Product
 {
+    protected $id;
     protected $sku;
     protected $name;
     protected $price;
 
+
     //Constructor
-    public function __construct($sku, $name, $price)
+    public function __construct($id, $sku, $name, $price)
     {
+        $this->id = $id;
         $this->sku = $sku;
         $this->name = $name;
         $this->price = $price;
@@ -43,6 +46,11 @@ abstract class Product
     public function setPrice($price)
     {
         $this->price = $price;
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     //Abstract methods to be implemented by subclasses

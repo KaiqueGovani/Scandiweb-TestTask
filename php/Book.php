@@ -5,9 +5,9 @@ class Book extends Product
     protected $weight;
 
     //Constructor
-    public function __construct($sku, $name, $price, $weight)
+    public function __construct($id, $sku, $name, $price, $weight)
     {
-        parent::__construct($sku, $name, $price);
+        parent::__construct($id, $sku, $name, $price);
         $this->weight = $weight;
     }
 
@@ -24,7 +24,7 @@ class Book extends Product
 
     public function getAttributes()
     {
-        
+        return $this->getWeight();
     }
 
     public function save()
