@@ -24,17 +24,12 @@ class Book extends Product
 
     public function getAttributes()
     {
-        return $this->getWeight();
+        return "Weight: " . $this->getWeight() . " KG";
     }
 
-    public function save()
+    public function getInsertQuery()
     {
-        // Logic to save DVD product to the database
-        // Implement the saving mechanism according to your project requirements
+        return "INSERT INTO products (sku, name, price, type, weight) VALUES ('" . $this->getSku() . "', '" . $this->getName() . "', '" . $this->getPrice() . "', 'Book', '" . $this->getWeight() . "')";
     }
 
-    public function delete()
-    {
-        // Logic to delete a product from the database
-    }
 }

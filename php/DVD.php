@@ -24,17 +24,12 @@ class DVD extends Product
 
     public function getAttributes()
     {
-        return $this->getSize();
+        return "Size: " . $this->getSize() . " MB";
     }
 
-    public function save()
+    public function getInsertQuery()
     {
-        // Logic to save DVD product to the database
-        // Implement the saving mechanism according to your project requirements
+        return "INSERT INTO products (sku, name, price, type, size) VALUES ('" . $this->getSku() . "', '" . $this->getName() . "', '" . $this->getPrice() . "', 'DVD', '" . $this->getSize() . "')";
     }
 
-    public function delete()
-    {
-        // Logic to delete a product from the database
-    }
 }

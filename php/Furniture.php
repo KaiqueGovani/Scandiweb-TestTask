@@ -51,14 +51,9 @@ class Furniture extends Product
         return "Dimensions: " . $this->height . "x" . $this->width . "x" . $this->length;
     }
 
-    public function save()
+    public function getInsertQuery()
     {
-        // Logic to save Furniture product to the database
-        // Implement the saving mechanism according to your project requirements
+        return "INSERT INTO products (sku, name, price, type, height, width, length) VALUES ('" . $this->getSku() . "', '" . $this->getName() . "', '" . $this->getPrice() . "', 'Furniture', '" . $this->getHeight() . "', '" . $this->getWidth() . "', '" . $this->getLength() . "')";
     }
 
-    public function delete()
-    {
-        // Logic to delete a product from the database
-    }
 }

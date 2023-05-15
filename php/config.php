@@ -154,5 +154,24 @@ class config{
         }
     }
 
+    public function addProduct($product){ // Add a product to the database
+        $insertQuery = $product->getInsertQuery();
+        $this->connection->query($insertQuery); // Execute the query
+    }
+
+    public function addProducts($products){ // Add multiple products to the database
+        foreach ($products as $product){
+            $this->addProduct($product);
+        }
+    }
+
+    public function checkSKU($sku){
+        $query = "SELECT COUNT(*) as count FROM products WHERE sku = '{$sku}'";
+        $result = $this->connection->query($query);
+        if ($result && $result->num_rows > 0) {
+            return $result->fetch_assoc()['count'] > 0;
+        }
+        return false;
+    }
 
 }

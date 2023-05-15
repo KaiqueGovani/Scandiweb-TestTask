@@ -55,7 +55,6 @@ abstract class Product
 
     //Abstract methods to be implemented by subclasses
     abstract public function getAttributes();
-    abstract public function save();
-    abstract public function delete();
+    abstract public function getInsertQuery();
 
 }
