@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 // Require all the files
 require_once 'php/config.php';
 require_once 'php/Product.php';
@@ -14,6 +16,9 @@ $config = new config();
 if (isset($_POST['sku'])) {
     // Get the product details from the form
     $sku = $_POST['sku'];
+    //Remove - from the SKU
+    $sku = str_replace("-", "",$sku);
+
     $name = $_POST['name'];
     $price = $_POST['price'];
     $type = $_POST['productType'];
@@ -30,22 +35,22 @@ if (isset($_POST['sku'])) {
 
     // Check if the SKU already exists
     if ($config->checkSKU($sku)) {
+        $_SESSION['error_message'] = "SKU already exists!";
+        header("Location: add-product.php");
+        
+    } else {
+        // Create a string variable with the class name
+        $className = $type;
+
+        // Create a new product object
+        $product = new $className(null, $sku, $name, $price, ...$attributes);
+
+        // Save the product to the database
+        $config->addProduct($product);
+
         // Redirect back to the product list page
-        echo "SKU already exists!"; 
-        exit();
+        header("Location: index.php");
+        
     }
-
-
-    // Create a string variable with the class name
-    $className = $type;
-
-    // Create a new product object
-    $product = new $className(null, $sku, $name, $price, ...$attributes);
-
-    // Save the product to the database
-    $config->addProduct($product);
-
-    // Redirect back to the product list page
-    header("Location: index.php");
     exit();
 }

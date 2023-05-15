@@ -59,8 +59,8 @@
             foreach ($products as $product) {
                 ?>
                 <div class="product">
-                    <div class="checkbox">
-                        <input class="delete-checkbox" type="checkbox" name="productsIds[]" value="<?php echo $product->getId()?>">
+                    <div class="form-check checkbox">
+                        <input class="form-check-label delete-checkbox" type="checkbox" name="productsIds[]" value="<?php echo $product->getId()?>">
                     </div>
                     <br>
                     <div>  

@@ -6,6 +6,8 @@ class config{
 
     private bool $backupDataLoaded = false; 
 
+    private $SkuExists = false;
+
     public function __construct(){
         // Create database connection
         $this->connection = new mysqli('localhost', 'sqluser', 'password', 'proddb');
