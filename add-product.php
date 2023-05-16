@@ -53,7 +53,7 @@
                     <label for="sku" class="col-sm-2 col-form-label">SKU</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="sku" name="sku" placeholder="XXX-XXX-XXX"
-                            autocomplete="off" maxlength="11" required>
+                            autocomplete="off" maxlength="15" required>
                         
                         <?php 
                         if (isset($_SESSION['error_message'])): ?>
