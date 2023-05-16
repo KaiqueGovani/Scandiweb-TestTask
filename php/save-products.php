@@ -3,11 +3,11 @@
 session_start();
 
 // Require all the files
-require_once 'php/config.php';
-require_once 'php/Product.php';
-require_once 'php/DVD.php';
-require_once 'php/Book.php';
-require_once 'php/Furniture.php';
+require_once 'config.php';
+require_once 'Product.php';
+require_once 'DVD.php';
+require_once 'Book.php';
+require_once 'Furniture.php';
 
 
 $config = new config();
@@ -36,7 +36,7 @@ if (isset($_POST['sku'])) {
     // Check if the SKU already exists
     if ($config->checkSKU($sku)) {
         $_SESSION['error_message'] = "SKU already exists!";
-        header("Location: add-product.php");
+        header("Location: ../add-product.php");
         
     } else {
         // Create a string variable with the class name
@@ -49,7 +49,7 @@ if (isset($_POST['sku'])) {
         $config->addProduct($product);
 
         // Redirect back to the product list page
-        header("Location: index.php");
+        header("Location: ../index.php");
         
     }
     exit();

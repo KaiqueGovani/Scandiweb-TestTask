@@ -1,7 +1,7 @@
 <?php
 
 // Include the config file
-require_once 'php/config.php';
+require_once 'config.php';
 
 $config = new config();
 
@@ -17,7 +17,7 @@ if (isset($_POST['productsIds'])) {
     }
 
     // Redirect back to the product list page
-    header("Location: index.php");
+    header("Location: ../index.php");
     exit();
 
 ?>

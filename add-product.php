@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,7 +44,7 @@
     <!-- Page Content -->
     <div class="main">
         <div class="forms-container">
-            <form class="needs-validation" id="product_form" action="save-products.php" method="post">
+            <form class="needs-validation" id="product_form" action="php/save-products.php" method="post">
                 
 
                 
@@ -54,11 +56,6 @@
                             autocomplete="off" maxlength="11" required>
                         
                         <?php 
-                            session_start();
-                        
-                        
-                        
-                        
                         if (isset($_SESSION['error_message'])): ?>
                             <script>
                                 document.getElementById("sku").classList.add("is-invalid");
@@ -84,7 +81,7 @@
                 <div class="row mb-3">
                     <label for="price" class="col-sm-2 col-form-label">Price</label>
                     <div class="col-sm-10">
-                        <input type="number" class="form-control" id="price" name="price" min="0" step="any"
+                        <input type="number" class="form-control" id="price" name="price" min="0" max="99999999.99" step="any"
                             autocomplete="off" required placeholder="$0.00">
                     </div>
                 </div>
@@ -181,7 +178,7 @@
             }
 
             // Set the formatted value back to the input
-            skuInput.value = formattedSKU;
+            skuInput.value = formattedSKU.toUpperCase();
         }
     </script>
 

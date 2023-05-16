@@ -48,7 +48,7 @@ class Furniture extends Product
 
     public function getAttributes()
     {
-        return "Dimensions: " . $this->height . "x" . $this->width . "x" . $this->length;
+        return "Dimensions: " . $this->height . " x " . $this->width . " x " . $this->length . " CM";
     }
 
     public function getInsertQuery()
