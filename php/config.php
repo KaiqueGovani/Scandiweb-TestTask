@@ -1,5 +1,10 @@
 <?php 
 
+define('DB_HOST', 'localhost');
+define('DB_USER', 'id20758956_dbuser');
+define('DB_PASS', 'Kapo!123');
+define('DB_NAME', 'id20758956_productsdatabase');
+
 class config{
 
     private $connection; // Database connection
@@ -8,9 +13,11 @@ class config{
 
     private $SkuExists = false;
 
+    
+
     public function __construct(){
         // Create database connection
-        $this->connection = new mysqli('localhost', 'id20758956_dbuser', 'Kapo!123', 'id20758956_productsdatabase');
+        $this->connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
         // Check connection
         if ($this->connection->connect_error) {
