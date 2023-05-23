@@ -102,7 +102,7 @@
                     <div class="row mb-3 hide" id="sizeContainer">
                         <label for="size" class="col-sm-2 col-form-label">Size (MB)</label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" id="size" name="size" min="0" step="any"
+                            <input type="number" class="form-control" id="size" name="attributes[size]" min="0" step="any"
                                 placeholder="MB" autocomplete="off">
                             <strong class="form-text">Please provide size in MB!</strong>
                         </div>
@@ -111,7 +111,7 @@
                     <div class="row mb-3 hide" id="weightContainer">
                         <label for="weight" class="col-sm-2 col-form-label">Weight (kg)</label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" id="weight" name="weight" min="0" step="any"
+                            <input type="number" class="form-control" id="weight" name="attributes[weight]" min="0" step="any"
                                 placeholder="kg" autocomplete="off">
                             <strong class="form-text">Please provide weight in kg!</strong>
                         </div>
@@ -121,21 +121,21 @@
                         <div class="col-md-4">
                             <label for="height" class="col-form-label">Height (H)</label>
                             <div>
-                                <input type="number" class="form-control" id="height" name="height" min="0" step="any"
+                                <input type="number" class="form-control" id="height" name="attributes[height]" min="0" step="any"
                                     placeholder="0.00cm" autocomplete="off">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <label for="width" class="col-form-label">Width</label>
                             <div>
-                                <input type="number" class="form-control" id="width" name="width" min="0" step="any"
+                                <input type="number" class="form-control" id="width" name="attributes[width]" min="0" step="any"
                                     placeholder="0.00cm" autocomplete="off">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <label for="length" class="col-form-label">Length</label>
                             <div>
-                                <input type="number" class="form-control" id="length" name="length" min="0" step="any"
+                                <input type="number" class="form-control" id="length" name="attributes[length]" min="0" step="any"
                                     placeholder="0.00cm" autocomplete="off">
                                 
                             </div>

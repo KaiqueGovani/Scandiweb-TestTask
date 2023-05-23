@@ -5,10 +5,10 @@ class Book extends Product
     protected $weight;
 
     //Constructor
-    public function __construct($id, $sku, $name, $price, $weight)
+    public function __construct($attributes)
     {
-        parent::__construct($id, $sku, $name, $price);
-        $this->weight = $weight;
+        parent::__construct($attributes);
+        $this->weight = $attributes['weight'];
     }
 
     //Getters and Setters

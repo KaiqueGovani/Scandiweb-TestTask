@@ -5,10 +5,10 @@ class DVD extends Product
     protected $size;
     
     //Constructor
-    public function __construct($id, $sku, $name, $price, $size)
+    public function __construct($attributes)
     {
-        parent::__construct($id, $sku, $name, $price);
-        $this->size = $size;
+        parent::__construct($attributes);
+        $this->size = $attributes['size'];
     }
 
     //Getters and Setters

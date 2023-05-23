@@ -1,9 +1,11 @@
 <?php 
 
 define('DB_HOST', 'localhost');
-define('DB_USER', 'id20758956_dbuser');
-define('DB_PASS', 'Kapo!123');
-define('DB_NAME', 'id20758956_productsdatabase');
+define('DB_USER', 'sqluser');
+define('DB_PASS', 'password');
+define('DB_NAME', 'proddb');
+
+session_start();
 
 class config{
 
@@ -39,13 +41,9 @@ class config{
         if ($result) { // Check if the result is valid
             while ($row = $result->fetch_assoc()) {
                 // Create a new product object
-                if ($row['type'] == 'DVD') {
-                    $product = new DVD($row['id'], $row['sku'], $row['name'], $row['price'], $row['size']);
-                } elseif ($row['type'] == 'Book') {
-                    $product = new Book($row['id'], $row['sku'], $row['name'], $row['price'], $row['weight']);
-                } elseif ($row['type'] == 'Furniture') {
-                    $product = new Furniture($row['id'], $row['sku'], $row['name'], $row['price'], $row['height'], $row['width'], $row['length']);
-                }
+                $productType = $row['type'];
+
+                $product = new $productType($row);
 
                 // Add the product object to the products array
                 $products[] = $product;
@@ -68,6 +66,46 @@ class config{
     public function deleteProductsByIds($productsIds){
         foreach ($productsIds as $productId){
             $this->deleteProductById($productId); // Delete each product
+        }
+    }
+
+    public function createNewProduct($POST){
+        // Get the product details from the form
+        $sku = $POST['sku'];
+        //Remove - from the SKU
+        $sku = str_replace("-", "",$sku);
+
+        $name = $POST['name'];
+        $price = $POST['price'];
+        $type = $POST['productType'];
+        $attributes = $POST['attributes'];
+
+        echo $sku . "<br>";
+        echo $name . "<br>";
+        echo $price . "<br>";
+        echo $type . "<br>";
+        print_r($attributes);
+        
+        return;
+
+        // Check if the SKU already exists
+        if ($this->checkSKU($sku)) {
+            $_SESSION['error_message'] = "SKU already exists!";
+            header("Location: ../add-product.php");
+            
+        } else {
+            // Create a string variable with the class name
+            $className = $type;
+
+            // Create a new product object
+            $product = new $className(null, $sku, $name, $price, $attributes);
+
+            // Save the product to the database
+            $this->addProduct($product);
+
+            // Redirect back to the product list page
+            header("Location: ../index.php");
+            
         }
     }
 
