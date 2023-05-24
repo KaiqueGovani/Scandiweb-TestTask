@@ -5,10 +5,11 @@ class Book extends Product
     protected $weight;
 
     //Constructor
-    public function __construct($id, $sku, $name, $price, $weight)
+    public function __construct($attributes)
     {
-        parent::__construct($id, $sku, $name, $price);
-        $this->weight = $weight;
+        parent::__construct($attributes);
+        $this->weight = $attributes['weight'];
+        $this->type = "Book";
     }
 
     //Getters and Setters
@@ -29,7 +30,7 @@ class Book extends Product
 
     public function getInsertQuery()
     {
-        return "INSERT INTO products (sku, name, price, type, weight) VALUES ('" . $this->getSku() . "', '" . $this->getName() . "', '" . $this->getPrice() . "', 'Book', '" . $this->getWeight() . "')";
+        return "INSERT INTO products (sku, name, price, type, weight) VALUES ('" . $this->getSku() . "', '" . $this->getName() . "', '" . $this->getPrice() . "', '" . $this->getType() . "', '" . $this->getWeight() . "')";
     }
 
 }

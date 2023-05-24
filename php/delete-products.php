@@ -1,7 +1,7 @@
 <?php
 
 // Include the config file
-require_once 'php/config.php';
+require_once 'config.php';
 
 $config = new config();
 
@@ -10,14 +10,12 @@ if (isset($_POST['productsIds'])) {
     // Get the selected product IDs from the checkboxes
     $productsIds = $_POST['productsIds'];
 
-
-
     //Delete the selected products
     $config->deleteProductsByIds($productsIds);
-    }
+}
 
-    // Redirect back to the product list page
-    header("Location: index.php");
-    exit();
+// Redirect back to the product list page
+header("Location: ../index.php");
+exit();
 
 ?>

@@ -3,12 +3,13 @@
 class DVD extends Product
 {
     protected $size;
-    
+
     //Constructor
-    public function __construct($id, $sku, $name, $price, $size)
+    public function __construct($attributes)
     {
-        parent::__construct($id, $sku, $name, $price);
-        $this->size = $size;
+        parent::__construct($attributes);
+        $this->size = $attributes['size'];
+        $this->type = "DVD";
     }
 
     //Getters and Setters
@@ -29,7 +30,7 @@ class DVD extends Product
 
     public function getInsertQuery()
     {
-        return "INSERT INTO products (sku, name, price, type, size) VALUES ('" . $this->getSku() . "', '" . $this->getName() . "', '" . $this->getPrice() . "', 'DVD', '" . $this->getSize() . "')";
+        return "INSERT INTO products (sku, name, price, type, size) VALUES ('" . $this->getSku() . "', '" . $this->getName() . "', '" . $this->getPrice() . "', '" . $this->getType() . "', '" . $this->getSize() . "')";
     }
 
 }
