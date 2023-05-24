@@ -1,4 +1,9 @@
-<?php 
+<?php
+
+require_once 'Product.php';
+require_once 'DVD.php';
+require_once 'Book.php';
+require_once 'Furniture.php';
 
 define('DB_HOST', 'localhost');
 define('DB_USER', 'sqluser');
@@ -7,17 +12,17 @@ define('DB_NAME', 'proddb');
 
 session_start();
 
-class config{
+class config
+{
 
     private $connection; // Database connection
 
-    private bool $backupDataLoaded = false; 
+    private bool $backupDataLoaded = false;
 
     private $SkuExists = false;
 
-    
-
-    public function __construct(){
+    public function __construct()
+    {
         // Create database connection
         $this->connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
@@ -27,13 +32,12 @@ class config{
         }
     }
 
-    
-
-    public function fetchProducts(){ // Fetch all products from the database
+    public function fetchProducts()
+    { // Fetch all products from the database
         // Logic to fetch products from the database
         $products = array();
-        
-        
+
+
         $query = "SELECT * FROM products"; // Create the query
         $result = $this->connection->query($query); // Execute the query
 
@@ -50,77 +54,71 @@ class config{
             }
 
             $result->free(); // Free the memory associated with the result
-        
+
         } else {
             die("Error! Query failed: " . $this->connection->error);
         }
-        
+
         return $products;
     }
 
-    public function deleteProductById($productId){ // Delete a product from the database
+    public function deleteProductById($productId)
+    { // Delete a product from the database
         $deleteQuery = "DELETE FROM products WHERE id = '{$productId}'"; // Create the delete query
         $this->connection->query($deleteQuery); // Execute the query
     }
 
-    public function deleteProductsByIds($productsIds){
-        foreach ($productsIds as $productId){
+    public function deleteProductsByIds($productsIds)
+    {
+        foreach ($productsIds as $productId) {
             $this->deleteProductById($productId); // Delete each product
         }
     }
 
-    public function createNewProduct($POST){
-        // Get the product details from the form
-        $sku = $POST['sku'];
-        //Remove - from the SKU
-        $sku = str_replace("-", "",$sku);
+    public function handleFormSubmission($POST)
+    {
 
-        $name = $POST['name'];
-        $price = $POST['price'];
-        $type = $POST['productType'];
-        $attributes = $POST['attributes'];
+        if (!isset($POST['data'])) {
+            die("Error! No data received!");
+        }
 
-        echo $sku . "<br>";
-        echo $name . "<br>";
-        echo $price . "<br>";
-        echo $type . "<br>";
-        print_r($attributes);
-        
-        return;
+        $data = $POST['data'];
 
         // Check if the SKU already exists
-        if ($this->checkSKU($sku)) {
+        if ($this->checkSKU($data['sku'])) {
             $_SESSION['error_message'] = "SKU already exists!";
             header("Location: ../add-product.php");
-            
+
         } else {
             // Create a string variable with the class name
-            $className = $type;
+            $className = $data['type'];
 
             // Create a new product object
-            $product = new $className(null, $sku, $name, $price, $attributes);
+            $product = new $className($data);
 
             // Save the product to the database
             $this->addProduct($product);
 
             // Redirect back to the product list page
             header("Location: ../index.php");
-            
         }
     }
 
-    public function addProduct($product){ // Add a product to the database
+    public function addProduct($product)
+    { // Add a product to the database
         $insertQuery = $product->getInsertQuery(); // Get the insert query for the product
         $this->connection->query($insertQuery); // Execute the query
     }
 
-    public function addProducts($products){ // Add multiple products to the database
-        foreach ($products as $product){
+    public function addProducts($products)
+    { // Add multiple products to the database
+        foreach ($products as $product) {
             $this->addProduct($product); // Add each product
         }
     }
 
-    public function checkSKU($sku){
+    public function checkSKU($sku)
+    {
         // Check if the SKU already exists
         $query = "SELECT COUNT(*) as count FROM products WHERE sku = '{$sku}'";
         $result = $this->connection->query($query);
@@ -129,5 +127,4 @@ class config{
         }
         return false; // Return false if the SKU does not exist
     }
-
 }

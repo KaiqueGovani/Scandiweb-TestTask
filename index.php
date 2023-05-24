@@ -42,10 +42,7 @@
 
     <?php
     //Include all the classes
-    require_once 'php/Product.php';
-    require_once 'php/DVD.php';
-    require_once 'php/Book.php';
-    require_once 'php/Furniture.php';
+    
     require_once 'php/config.php';
 
     //Create an instance of the config class
@@ -70,14 +67,22 @@
                         </div>
                         <br>
                         <div class="product-info">
-                            <p><?php echo $product->getSku(); ?></p>
-                            <p><?php echo $product->getName(); ?></p>
-                            <p>Price: <?php echo $product->getPrice(); ?> $</p>
-                            <p><?php echo $product->getAttributes(); ?></p>
+                            <p>
+                                <?php echo $product->getSku(); ?>
+                            </p>
+                            <p>
+                                <?php echo $product->getName(); ?>
+                            </p>
+                            <p>Price:
+                                <?php echo $product->getPrice(); ?> $
+                            </p>
+                            <p>
+                                <?php echo $product->getAttributes(); ?>
+                            </p>
                         </div>
                     </div>
 
-                <?php
+                    <?php
                 }
                 ?>
             </div>

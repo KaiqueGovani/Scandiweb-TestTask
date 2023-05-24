@@ -45,50 +45,50 @@
     <div class="main">
         <div class="forms-container">
             <form class="needs-validation" id="product_form" action="php/save-products.php" method="post">
-                
 
-                
+
+
 
                 <div class="row mb-3">
                     <label for="sku" class="col-sm-2 col-form-label">SKU</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="sku" name="sku" placeholder="XXX-XXX-XXX"
+                        <input type="text" class="form-control" id="sku" name="data[sku]" placeholder="XXX-XXX-XXX"
                             autocomplete="off" maxlength="15" required>
-                        
-                        <?php 
+
+                        <?php
                         if (isset($_SESSION['error_message'])): ?>
                             <script>
                                 document.getElementById("sku").classList.add("is-invalid");
                             </script>
                             <div class="invalid-feedback">
-                                <?php 
-                                echo $_SESSION['error_message']; 
+                                <?php
+                                echo $_SESSION['error_message'];
                                 unset($_SESSION['error_message']);
                                 ?>
                             </div>
                         <?php endif; ?>
                     </div>
                 </div>
-    
+
 
                 <div class="row mb-3">
                     <label for="name" class="col-sm-2 col-form-label">Name</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Product name"
+                        <input type="text" class="form-control" id="name" name="data[name]" placeholder="Product name"
                             autocomplete="off" maxlength="255" required>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="price" class="col-sm-2 col-form-label">Price</label>
                     <div class="col-sm-10">
-                        <input type="number" class="form-control" id="price" name="price" min="0" max="99999999.99" step="any"
-                            autocomplete="off" required placeholder="$0.00">
+                        <input type="number" class="form-control" id="price" name="data[price]" min="0"
+                            max="99999999.99" step="any" autocomplete="off" required placeholder="$0.00">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="productType" class="col-sm-2 col-form-label">Product Type</label>
                     <div class="col-sm-10">
-                        <select class="form-select" name="productType" id="productType" onchange="changeProductType()"
+                        <select class="form-select" name="data[type]" id="productType" onchange="changeProductType()"
                             required>
                             <option value="" selected disabled>Select product type</option>
                             <option value="DVD">DVD</option>
@@ -102,7 +102,7 @@
                     <div class="row mb-3 hide" id="sizeContainer">
                         <label for="size" class="col-sm-2 col-form-label">Size (MB)</label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" id="size" name="attributes[size]" min="0" step="any"
+                            <input type="number" class="form-control" id="size" name="data[size]" min="0" step="any"
                                 placeholder="MB" autocomplete="off">
                             <strong class="form-text">Please provide size in MB!</strong>
                         </div>
@@ -111,7 +111,7 @@
                     <div class="row mb-3 hide" id="weightContainer">
                         <label for="weight" class="col-sm-2 col-form-label">Weight (kg)</label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" id="weight" name="attributes[weight]" min="0" step="any"
+                            <input type="number" class="form-control" id="weight" name="data[weight]" min="0" step="any"
                                 placeholder="kg" autocomplete="off">
                             <strong class="form-text">Please provide weight in kg!</strong>
                         </div>
@@ -121,23 +121,23 @@
                         <div class="col-md-4">
                             <label for="height" class="col-form-label">Height (H)</label>
                             <div>
-                                <input type="number" class="form-control" id="height" name="attributes[height]" min="0" step="any"
-                                    placeholder="0.00cm" autocomplete="off">
+                                <input type="number" class="form-control" id="height" name="data[height]" min="0"
+                                    step="any" placeholder="0.00cm" autocomplete="off">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <label for="width" class="col-form-label">Width</label>
                             <div>
-                                <input type="number" class="form-control" id="width" name="attributes[width]" min="0" step="any"
-                                    placeholder="0.00cm" autocomplete="off">
+                                <input type="number" class="form-control" id="width" name="data[width]" min="0"
+                                    step="any" placeholder="0.00cm" autocomplete="off">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <label for="length" class="col-form-label">Length</label>
                             <div>
-                                <input type="number" class="form-control" id="length" name="attributes[length]" min="0" step="any"
-                                    placeholder="0.00cm" autocomplete="off">
-                                
+                                <input type="number" class="form-control" id="length" name="data[length]" min="0"
+                                    step="any" placeholder="0.00cm" autocomplete="off">
+
                             </div>
                         </div>
                         <strong class="form-text">Please provide dimensions in HxWxL format!</strong>

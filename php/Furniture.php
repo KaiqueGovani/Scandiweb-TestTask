@@ -5,7 +5,7 @@ class Furniture extends Product
     protected $height;
     protected $width;
     protected $length;
-    
+
     //Constructor
     public function __construct($attributes)
     {
@@ -13,6 +13,7 @@ class Furniture extends Product
         $this->height = $attributes['height'];
         $this->width = $attributes['width'];
         $this->length = $attributes['length'];
+        $this->type = "Furniture";
     }
 
     //Getters and Setters
@@ -53,7 +54,7 @@ class Furniture extends Product
 
     public function getInsertQuery()
     {
-        return "INSERT INTO products (sku, name, price, type, height, width, length) VALUES ('" . $this->getSku() . "', '" . $this->getName() . "', '" . $this->getPrice() . "', 'Furniture', '" . $this->getHeight() . "', '" . $this->getWidth() . "', '" . $this->getLength() . "')";
+        return "INSERT INTO products (sku, name, price, type, height, width, length) VALUES ('" . $this->getSku() . "', '" . $this->getName() . "', '" . $this->getPrice() . "', '" . $this->getType() . "', '" . $this->getHeight() . "', '" . $this->getWidth() . "', '" . $this->getLength() . "')";
     }
 
 }

@@ -6,12 +6,13 @@ abstract class Product
     protected $sku;
     protected $name;
     protected $price;
+    protected $type;
 
 
     //Constructor
     public function __construct($attributes)
     {
-        $this->id = $attributes['id'];    
+        $this->id = $attributes['id'];
         $this->sku = $attributes['sku'];
         $this->name = $attributes['name'];
         $this->price = $attributes['price'];
@@ -36,6 +37,16 @@ abstract class Product
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    public function setType($type)
+    {
+        $this->type = $type;
     }
 
     public function getPrice()
