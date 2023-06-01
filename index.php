@@ -42,7 +42,8 @@
 
     <?php
     //Include all the classes
-    
+    session_start();
+
     require_once 'php/config.php';
 
     //Create an instance of the config class

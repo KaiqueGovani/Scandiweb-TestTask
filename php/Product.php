@@ -12,8 +12,8 @@ abstract class Product
     //Constructor
     public function __construct($attributes)
     {
-        $this->id = $attributes['id'];
-        $this->sku = $attributes['sku'];
+        if (isset($attributes['id'])) $this->id = $attributes['id'];
+        $this->sku = str_replace("-", "",$attributes['sku']); //Remove - from the SKU
         $this->name = $attributes['name'];
         $this->price = $attributes['price'];
     }

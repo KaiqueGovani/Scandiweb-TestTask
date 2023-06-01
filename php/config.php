@@ -6,11 +6,9 @@ require_once 'Book.php';
 require_once 'Furniture.php';
 
 define('DB_HOST', 'localhost');
-define('DB_USER', 'sqluser');
-define('DB_PASS', 'password');
-define('DB_NAME', 'proddb');
-
-session_start();
+define('DB_USER', 'your-username');
+define('DB_PASS', 'your-password');
+define('DB_NAME', 'your-database-name');
 
 class config
 {
@@ -75,17 +73,39 @@ class config
         }
     }
 
-    public function handleFormSubmission($POST)
+    public function handleFormSubmission($POST, $action)
     {
+        if ($action == 'delete') {
+            $this->handleDeleteFormSubmission($POST);
+        } else if ($action == 'save') {
+            $this->handleSaveFormSubmission($POST);
+        }
+    }
 
+    public function handleDeleteFormSubmission($POST)
+    {
+        if (isset($POST['productsIds'])) {
+            // Get the selected product IDs from the checkboxes
+            $productsIds = $POST['productsIds'];
+
+            //Delete the selected products
+            $this->deleteProductsByIds($productsIds);
+        }
+        // Redirect back to the product list page
+        header("Location: ../index.php");
+    }
+
+    public function handleSaveFormSubmission($POST)
+    {
+        // Check if the data is received
         if (!isset($POST['data'])) {
             die("Error! No data received!");
         }
 
         $data = $POST['data'];
-
+        $sku = str_replace("-", "",$data['sku']); //Remove - from the SKU
         // Check if the SKU already exists
-        if ($this->checkSKU($data['sku'])) {
+        if ($this->checkSKU($sku)) {
             $_SESSION['error_message'] = "SKU already exists!";
             header("Location: ../add-product.php");
 
