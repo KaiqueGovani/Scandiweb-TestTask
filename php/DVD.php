@@ -33,4 +33,18 @@ class DVD extends Product
         return "INSERT INTO products (sku, name, price, type, size) VALUES ('" . $this->getSku() . "', '" . $this->getName() . "', '" . $this->getPrice() . "', '" . $this->getType() . "', '" . $this->getSize() . "')";
     }
 
+    public function validateAttributes($data)
+    {
+        $size = $this->getSize();
+        $error = '';
+        if (!isset($size) || $size == "") {
+            $error = "Size is required";
+        } else if (!is_numeric($size)) {
+            $error = "Size must be a number";
+        } else if ($size < 0) {
+            $error = "Size must be a positive number";
+        }
+        return $error;
+    }
+
 }

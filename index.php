@@ -1,3 +1,11 @@
+<?php
+    require_once 'php/config.php';
+
+    //Create an instance of the config class
+    $config = new config();
+    $products = $config->fetchProducts();
+?>
+
 <!-- index.php -->
 <!DOCTYPE html>
 <html lang="en">
@@ -39,52 +47,12 @@
         </div>
     </header>
 
-
-    <?php
-    //Include all the classes
-    session_start();
-
-    require_once 'php/config.php';
-
-    //Create an instance of the config class
-    $config = new config();
-    $products = $config->fetchProducts();
-
-    ?>
-
     <!-- Page Content -->
     <div class="main">
         <form id="delete-form" method="post" action="php/delete-products.php">
             <div class="products-container">
-
                 <?php
-                //Loop through the products array and display the product details
-                foreach ($products as $product) {
-                    ?>
-                    <div class="product">
-                        <div class="form-check checkbox">
-                            <input class="form-check-label delete-checkbox" type="checkbox" name="productsIds[]"
-                                value="<?php echo $product->getId() ?>">
-                        </div>
-                        <br>
-                        <div class="product-info">
-                            <p>
-                                <?php echo $product->getSku(); ?>
-                            </p>
-                            <p>
-                                <?php echo $product->getName(); ?>
-                            </p>
-                            <p>Price:
-                                <?php echo $product->getPrice(); ?> $
-                            </p>
-                            <p>
-                                <?php echo $product->getAttributes(); ?>
-                            </p>
-                        </div>
-                    </div>
-
-                    <?php
-                }
+                $config->renderProducts($products);
                 ?>
             </div>
         </form>

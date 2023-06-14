@@ -57,4 +57,36 @@ class Furniture extends Product
         return "INSERT INTO products (sku, name, price, type, height, width, length) VALUES ('" . $this->getSku() . "', '" . $this->getName() . "', '" . $this->getPrice() . "', '" . $this->getType() . "', '" . $this->getHeight() . "', '" . $this->getWidth() . "', '" . $this->getLength() . "')";
     }
 
+    public function validateAttributes($data)
+    {
+        $height = $this->getHeight();
+        $width = $this->getWidth();
+        $length = $this->getLength();
+        $error = "";
+
+        if (!isset($height) || $height == "") {
+            $error = "Height is required";
+        } else if (!is_numeric($height)) {
+            $error = "Height must be a number";
+        } else if ($height < 0) {
+            $error = "Height must be a positive number";
+            
+        } else if (!isset($width) || $width == "") {
+            $error = "Width is required";
+        } else if (!is_numeric($width)) {
+            $error = "Width must be a number";
+        } else if ($width < 0) {
+            $error = "Width must be a positive number";
+
+        } else if (!isset($length) || $length == "") {
+            $error = "Length is required";
+        } else if (!is_numeric($length)) {
+            $error = "Length must be a number";
+        } else if ($length < 0) {
+            $error = "Length must be a positive number";
+        }
+        
+        return $error;
+    }
+
 }

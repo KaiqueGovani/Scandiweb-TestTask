@@ -1,4 +1,9 @@
-<?php session_start(); ?>
+<?php
+    require_once 'php/config.php';
+
+    //Create an instance of the config class
+    $config = new config();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,32 +50,17 @@
     <div class="main">
         <div class="forms-container">
             <form class="needs-validation" id="product_form" action="php/save-products.php" method="post">
-
-
-
-
+                <!-- "SKU" input field -->
                 <div class="row mb-3">
                     <label for="sku" class="col-sm-2 col-form-label">SKU</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="sku" name="data[sku]" placeholder="XXX-XXX-XXX"
                             autocomplete="off" maxlength="15" required>
-
-                        <?php
-                        if (isset($_SESSION['error_message'])): ?>
-                            <script>
-                                document.getElementById("sku").classList.add("is-invalid");
-                            </script>
-                            <div class="invalid-feedback">
-                                <?php
-                                echo $_SESSION['error_message'];
-                                unset($_SESSION['error_message']);
-                                ?>
-                            </div>
-                        <?php endif; ?>
+                        <?php $config->checkError() ?>
                     </div>
                 </div>
 
-
+                <!-- "Name" input field -->
                 <div class="row mb-3">
                     <label for="name" class="col-sm-2 col-form-label">Name</label>
                     <div class="col-sm-10">
@@ -78,6 +68,8 @@
                             autocomplete="off" maxlength="255" required>
                     </div>
                 </div>
+
+                <!-- "Price" input field -->
                 <div class="row mb-3">
                     <label for="price" class="col-sm-2 col-form-label">Price</label>
                     <div class="col-sm-10">
@@ -85,6 +77,8 @@
                             max="99999999.99" step="any" autocomplete="off" required placeholder="$0.00">
                     </div>
                 </div>
+
+                <!-- "Product Type" dropdown -->
                 <div class="row mb-3">
                     <label for="productType" class="col-sm-2 col-form-label">Product Type</label>
                     <div class="col-sm-10">
@@ -97,6 +91,7 @@
                         </select>
                     </div>
                 </div>
+
                 <div id="typeSpecificAttributes">
                     <!-- DVD attributes -->
                     <div class="row mb-3 hide" id="sizeContainer">
