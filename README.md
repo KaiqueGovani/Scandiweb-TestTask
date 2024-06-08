@@ -70,6 +70,6 @@ If you have any questions, please feel free to contact me at [kaique.govani@hotm
 
 
 ___
-<sup>Note: This README file was written with the assistance of an AI language model. While efforts have been made to ensure the accuracy and clarity of the information provided, please review and modify the content as necessary to fit your specific project requirements and circumstances.</sup>
+<sup>Note: This README file was written with the assistance of an AI language model. Efforts have been made to ensure the accuracy and clarity of the information provided.</sup>
 
 
